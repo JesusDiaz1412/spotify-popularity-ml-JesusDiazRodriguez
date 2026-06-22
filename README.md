@@ -1,16 +1,16 @@
-# 🎵 Predicción de Popularidad en Spotify
+#  Predicción de Popularidad en Spotify
 
 Proyecto de Machine Learning para predecir la popularidad de canciones en Spotify a partir de sus características de audio, utilizando técnicas de regresión supervisada.
 
 ---
 
-## 📋 Descripción
+##  Descripción
 
 Este proyecto aplica técnicas de aprendizaje supervisado sobre el [Spotify Tracks Dataset](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset) para modelar y predecir la variable `popularity` (0–100) de una canción en función de sus atributos de audio como `danceability`, `energy`, `loudness`, `tempo`, entre otros.
 
 ---
 
-## 🎯 Objetivos
+##  Objetivos
 
 1. Realizar un análisis exploratorio de los datos (EDA) e identificar las features más relevantes para predecir popularidad.
 2. Preprocesar el dataset: normalización, manejo de outliers y codificación de variables categóricas.
@@ -21,7 +21,7 @@ Este proyecto aplica técnicas de aprendizaje supervisado sobre el [Spotify Trac
 
 ---
 
-## 📁 Estructura del Repositorio
+##  Estructura del Repositorio
 
 ```
 spotify-popularity-ml/
@@ -41,7 +41,7 @@ spotify-popularity-ml/
 
 ---
 
-## 📊 Dataset
+##  Dataset
 
 - **Fuente:** [Kaggle — Maharshi Pandya](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset)
 - **Tamaño:** ~114,000 canciones | 125 géneros musicales
@@ -59,7 +59,7 @@ kaggle datasets download -d maharshipandya/-spotify-tracks-dataset --unzip
 
 ---
 
-## 🛠️ Instalación
+##  Instalación
 
 ```bash
 git clone https://github.com/[tu-usuario]/spotify-popularity-ml.git
@@ -69,24 +69,24 @@ pip install -r requirements.txt
 
 ---
 
-## 🗓️ Cronograma
+##  Cronograma
 
 | Semana | Entregable | Estado |
 |--------|-----------|--------|
-| 1–2 | Avance #1: Dataset, objetivos y cronograma | ✅ |
-| 3–4 | Avance #2: Preprocesamiento + técnica base | 🔄 |
-| 5–6 | Entrenamiento técnica 2 + tuning | ⬜ |
-| 7 | Comparación de modelos | ⬜ |
-| 8 | Entrega final | ⬜ |
+| 1 | Avance #1: Dataset, objetivos y cronograma |  |
+| 1 | Avance #2: Preprocesamiento + técnica base |  |
+| 1 | Entrenamiento técnica 2 + tuning | |
+| 2 | Comparación de modelos |  |
+| 2 | Entrega final |  |
 
 ---
 
-## 📦 Dependencias
+##  Dependencias
 
 Ver `requirements.txt`
 
 ---
 
-## 👤 Autores
+##  Autores
 
-- [Tu nombre] — [institución / curso]
+- [Jesús Díaz Rodríguez] — [UAEM, ICCBA, CINC, Lic. en Inteligencia Artificial / Machine Learning]
