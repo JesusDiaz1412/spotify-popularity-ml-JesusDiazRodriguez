@@ -1,27 +1,39 @@
-#  Predicción de Popularidad en Spotify
+# Predicción de Popularidad en Spotify
 
-Proyecto de Machine Learning para predecir la popularidad de canciones en Spotify a partir de sus características de audio, utilizando técnicas de regresión supervisada.
-
----
-
-##  Descripción
-
-Este proyecto aplica técnicas de aprendizaje supervisado sobre el [Spotify Tracks Dataset](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset) para modelar y predecir la variable `popularity` (0–100) de una canción en función de sus atributos de audio como `danceability`, `energy`, `loudness`, `tempo`, entre otros.
+Proyecto de Machine Learning para predecir la popularidad de canciones en Spotify a partir de sus características de audio, utilizando técnicas de clasificación supervisada multiclase.
 
 ---
 
-##  Objetivos
+## Descripción
 
-1. Realizar un análisis exploratorio de los datos (EDA) e identificar las features más relevantes para predecir popularidad.
-2. Preprocesar el dataset: normalización, manejo de outliers y codificación de variables categóricas.
-3. Entrenar y comparar al menos **2 técnicas de regresión**:
-   - **Técnica 1:** Regresión Lineal / Polinomial (baseline)
-   - **Técnica 2:** Regresión Ridge o Lasso (regularización)
-4. Evaluar los modelos con métricas MSE, RMSE y R².
+Este proyecto aplica técnicas de aprendizaje supervisado sobre el [Spotify Tracks Dataset](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset) para modelar y predecir el **rango de popularidad** de una canción en función de sus atributos de audio como `danceability`, `energy`, `loudness`, `tempo`, entre otros.
+
+### Cambio de enfoque: de regresión a clasificación
+
+El proyecto comenzó planteado como un problema de **regresión continua** sobre la variable `popularity` (0–100). Tras el análisis exploratorio de la Fase 1, se decidió reformular el problema como una **clasificación multiclase** por las siguientes razones:
+
+1. **Distribución del target:** la variable `popularity` presenta un fuerte sesgo hacia valores bajos, con una alta concentración de canciones con popularidad cercana a 0. Predecir el valor exacto en ese contexto introduce ruido innecesario.
+2. **Utilidad práctica:** desde una perspectiva de negocio, conocer el *rango* de popularidad (baja / media / alta) es más accionable que un valor numérico exacto.
+3. **Robustez de las métricas:** las métricas de clasificación (accuracy, F1-score, matriz de confusión) son más interpretables y permiten un análisis de errores por clase, lo cual enriquece la comparación entre modelos.
+4. **Compatibilidad con técnicas más diversas:** el cambio permite incorporar algoritmos como Support Vector Classifier (SVC), que son referentes en problemas de clasificación.
+
+La variable `popularity` se transforma en una variable categórica con rangos definidos, manteniendo el resto del pipeline (limpieza, encoding, escalado) bajo las mismas buenas prácticas de ingeniería.
 
 ---
 
-##  Estructura del Repositorio
+## Objetivos
+
+1. Realizar un análisis exploratorio de los datos (EDA) e identificar las features más relevantes para predecir el rango de popularidad.
+2. Preprocesar el dataset: limpieza, codificación de variables categóricas (Target Encoding sin data leakage) y escalado.
+3. Entrenar y comparar **3 técnicas de clasificación**:
+   - **Modelo base:** Decision Tree Classifier
+   - **Modelo 2:** Random Forest Classifier
+   - **Modelo 3:** Support Vector Classifier (SVC)
+4. Evaluar los modelos con métricas Accuracy, F1-Score (macro y weighted) y matriz de confusión.
+
+---
+
+## Estructura del Repositorio
 
 ```
 spotify-popularity-ml/
@@ -31,22 +43,23 @@ spotify-popularity-ml/
 ├── .gitignore
 │
 ├── data/
-│   └── .gitkeep              # El CSV no se sube al repo (ver instrucciones abajo)
+│   └── .gitkeep              
 │
 └── notebooks/
-    ├── fase1_exploracion.ipynb     # Dataset, objetivos, cronograma, EDA inicial
-    ├── fase2_preprocesamiento.ipynb  # Preprocesamiento + técnica base
-    └── fase3_comparacion.ipynb     # Comparación de modelos + resultados finales
+    ├── 01_fase1_eda.ipynb              # Dataset, objetivos, cronograma, EDA inicial
+    ├── 02_fase2_preprocessing.ipynb    # Preprocesamiento + modelo base
+    └── 03_final_classification.ipynb   # Clasificación multiclase + comparación de 3 modelos
 ```
 
 ---
 
-##  Dataset
+## Dataset
 
 - **Fuente:** [Kaggle — Maharshi Pandya](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset)
 - **Tamaño:** ~114,000 canciones | 125 géneros musicales
 - **Features principales:** `danceability`, `energy`, `loudness`, `speechiness`, `acousticness`, `instrumentalness`, `liveness`, `valence`, `tempo`, `duration_ms`, `track_genre`
-- **Target:** `popularity` (int, 0–100)
+- **Target original:** `popularity` (int, 0–100)
+- **Target transformado:** variable categórica multiclase con rangos de popularidad
 
 ### ¿Cómo obtener el dataset?
 
@@ -59,7 +72,7 @@ kaggle datasets download -d maharshipandya/-spotify-tracks-dataset --unzip
 
 ---
 
-##  Instalación
+## Instalación
 
 ```bash
 git clone https://github.com/[tu-usuario]/spotify-popularity-ml.git
@@ -69,24 +82,24 @@ pip install -r requirements.txt
 
 ---
 
-##  Cronograma
+## Cronograma
 
 | Semana | Entregable | Estado |
 |--------|-----------|--------|
-| 1 | Avance #1: Dataset, objetivos y cronograma |  |
-| 1 | Avance #2: Preprocesamiento + técnica base |  |
-| 1 | Entrenamiento técnica 2 + tuning | |
-| 2 | Comparación de modelos |  |
-| 2 | Entrega final |  |
+| 1 | Avance #1: Dataset, objetivos y cronograma | Completado |
+| 1 | Avance #2: Preprocesamiento + técnica base | Completado |
+| 1 | Entrenamiento técnicas finales + tuning | En curso |
+| 2 | Comparación de modelos | Pendiente |
+| 2 | Entrega final | Pendiente |
 
 ---
 
-##  Dependencias
+## Dependencias
 
 Ver `requirements.txt`
 
 ---
 
-##  Autores
+## Autores
 
-- [Jesús Díaz Rodríguez] — [UAEM, ICCBA, CINC, Lic. en Inteligencia Artificial / Machine Learning]
+- [Jesús Díaz Rodríguez] — [UAEM, ICCBA, CINC, Lic. en Inteligencia Artificial / Machine Learning].
